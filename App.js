@@ -21,12 +21,16 @@ export default function App() {
     //   ]
     // })
     setTodos((prev) => [
-      ...prev,
       {
         id: Date.now().toString(),
         title: title,
-      }
+      },
+      ...prev,
     ])
+  }
+  const removeTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id)
+    )
   }
   return (
     <View >
@@ -37,12 +41,10 @@ export default function App() {
           keyExtractor={item => item.id.toString()}
           data={todos}
           renderItem={({ item }) => {
-            return <Todo todo={item} />
+            return <Todo todo={item} removeByID={removeTodo} />
           }}
         />
-
       </View>
-
     </View>
   );
 }
@@ -52,6 +54,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 22,
   }
-
-
 });
+//https://clc.to/rnative  end free go
